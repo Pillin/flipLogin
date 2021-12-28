@@ -1,25 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components"
+import FlipBox from './components/containers/FlipBox';
+import LoginForm from './components/forms/LoginForm';
+import { SecondaryButton } from "./components/core/Button"
+
+
+const StyledBody = styled.main`
+  position: relative;
+  min-width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+`;
+
+
 
 function App() {
+
+  const [open, setOpen] = React.useState(true);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledBody>
+      <SecondaryButton variant="contained" color="secondary" onClick={() => setOpen(true)}>Open Login</SecondaryButton>
+      <FlipBox onClose={() => setOpen(false)} open={open}>
+        <LoginForm onSuccess={() => setOpen(false)} />
+      </FlipBox>
+
+    </StyledBody>
   );
 }
 
